@@ -36,3 +36,6 @@ else:win32:CONFIG(debug, debug|release): LIBS += -L'D:/Program Files (x86)/mysql
 
 INCLUDEPATH += 'D:/Program Files (x86)/mysql-8.0.28-winx64/include'
 DEPENDPATH += 'D:/Program Files (x86)/mysql-8.0.28-winx64/include'
+
+RESOURCES += \
+    resources.qrc
