@@ -1,0 +1,16 @@
+INSERT INTO userinfo (`userid`, `username`, `userpassword`, `isactive`, `userphone`, `useremail`) VALUES (1, '磨暮', 'jjfN8m$J(nJ9rX@auPwe', 1, '15362264107', 'wwmgbp@qq.com;'),(2, '介雅诗', '7K1&pORh$~vOr7Sc', 1, '15181495409', 'hobpgnesqkbjdn@sohu.com');
+INSERT INTO admininfo ('adminid', 'adminname', 'adminpassword', 'isactive', 'adminphone', 'adminemail', 'padminid') VALUES (21, '班代天', 'AZHR1p00XcXjy&k@$9\r\n', 1, '18414137037', 'thlrq@263.net', NULL);
+INSERT INTO admininfo ('adminid', 'adminname', 'adminpassword', 'isactive', 'adminphone', 'adminemail', 'padminid') VALUES (24, '都凡之', 'pumusnDX(viM^sL', 1, '13891263138', 'citwbdp@265.com', 21);
+INSERT INTO admininfo ('adminid', 'adminname', 'adminpassword', 'isactive', 'adminphone', 'adminemail', 'padminid') VALUES (2, '蒙舒方', '!ZBfutlizhT6m~TcB8le', 1, '15734882709', 'hdala@56.com', 21);
+INSERT INTO admininfo ('adminid', 'adminname', 'adminpassword', 'isactive', 'adminphone', 'adminemail', 'padminid') VALUES (7, '戢齐敏', 'Wb&Hp!r%s%XhgsS&fDM', 1, '18029828973', 'nibao@163.com', 21);
+INSERT INTO admininfo ('adminid', 'adminname', 'adminpassword', 'isactive', 'adminphone', 'adminemail', 'padminid') VALUES (15, '曾合美', '^g9&&ReWu4o', 1, '17377237638', 'wbu@163.net', 21);
+INSERT INTO houseinfo (`houseid`, `location`, `housestate`, `house_adminid`) VALUES (1, '清溪小区4 栋8楼20号', 1, 8),(2, '清溪小区5 栋2楼12号', 1, 16);
+INSERT INTO complaint_and_acviceinfo (`c_aid`, `c_atime`, `c_aobject`, `c_acontent`, `c_a_userid`, `c_a_adminid`) VALUES (1, '2018-03-21 06:25:59', 'xxxxxx', 'xxxxxxx', 14, 20),(2, '2017-11-07 09:23:03', 'xxxxxx', 'xxxxxxx', 55, 25);
+INSERT INTO newsinfo (`newsid`, `newstime`, `newscontent`, `news_adminid`, `newstype`, `newsendtime`) VALUES (1, '2020-12-16 08:37:21', 'xxxx', 20, 1, '2020-04-18 07:03:44'),(2, '2019-05-19 11:59:08', 'xxxx', 25, 2, NULL);
+INSERT INTO costtypeinfo (`costtypeid`, `costtype`) VALUES (1, '水费'),(2, '电费');
+INSERT INTO costinfo (`costid`, `coststarttime`, `paytime`, `costmoney`, `cost_userid`, `cost_houseid`, `cost_costtypeid`) VALUES (1, '2021-06-08 12:33:55', '2021-06-13 07:43:55', 170.083920017742514, 7, 20, 2),(2, '2020-09-15 08:09:39', '2020-09-16 10:03:03', 636.686875427754899, 36, 7, 3);
+INSERT INTO taskinfo (`taskid`, `taskstate`, `taskcontent`, `task_userid`) VALUES (1, 2, '暖气故障', 70),(2, 2, '修门', 77);
+INSERT INTO pcarinfo (`pcarid`, `pcarstate`, `pcarloction`, `buytime`, `pcar_houseid`) VALUES (1, 1, '1', '2017-03-26 17:31:07', 26),(2, 1, '2', '2021-04-19 05:34:36', 22);
+INSERT INTO user_houserelation (`uh_relation_userid`, `uh_relation_houseid`, `gethousetime`, `movetime`) VALUES (30, 40, '2018-07-25 08:54:34', '2018-10-13 03:20:08'),(64, 40, '2017-12-13 01:51:14', '2018-11-25 11:01:23');
+INSERT INTO updatarelation (`updataid`, `updatacontent`, `updatatime`, `updata_houseid`, `updata_adminid`) VALUES (1, 'xxxx', '2018-01-17 06:07:09', 39, 8),(2, 'xxxx', '2017-06-19 12:07:37', 13, 8);
+INSERT INTO admin_taskrelation (`admin_taskid`, `ataskstate`, `taskstarttime`, `taskendtime`, `admin_task_taskid`, `admin_task_adminid`) VALUES (67, 1, '2020-02-23 21:48:25', '2017-12-11 18:03:04', 61, 13),(68, 1, '2018-04-02 03:22:27', '2021-02-21 13:53:33', 62, 13);

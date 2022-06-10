@@ -1,0 +1,12 @@
+SELECT * FROM userinfo LIMIT 10;
+SELECT * FROM admininfo LIMIT 10;
+SELECT * FROM houseinfo LIMIT 10;
+SELECT * FROM complaint_and_acviceinfo LIMIT 10;
+SELECT * FROM newsinfo LIMIT 10;
+SELECT * FROM costtypeinfo LIMIT 10;
+SELECT * FROM costinfo LIMIT 10;
+SELECT * FROM taskinfo LIMIT 10;
+SELECT * FROM pcarinfo LIMIT 10;
+SELECT * FROM user_houserelation LIMIT 10;
+SELECT * FROM updatarelation LIMIT 10;
+SELECT * FROM admin_taskrelation LIMIT 10;

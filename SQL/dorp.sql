@@ -1,0 +1,12 @@
+DROP TABLE userinfo;
+DROP TABLE admininfo;
+DROP TABLE houseinfo;
+DROP TABLE complaint_and_acviceinfo;
+DROP TABLE newsinfo;
+DROP TABLE costtypeinfo;
+DROP TABLE costinfo;
+DROP TABLE taskinfo;
+DROP TABLE pcarinfo;
+DROP TABLE user_houserelation;
+DROP TABLE updatarelation;
+DROP TABLE admin_taskrelation;
