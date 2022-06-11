@@ -1,3 +1,10 @@
 <RCC>
-    <qresource prefix="/image"/>
+    <qresource prefix="/res">
+        <file>icon/Close.png</file>
+        <file>icon/Max_1.png</file>
+        <file>icon/Max_2.png</file>
+        <file>icon/min.png</file>
+        <file>image/Logo.png</file>
+        <file>icon/Login.png</file>
+    </qresource>
 </RCC>
