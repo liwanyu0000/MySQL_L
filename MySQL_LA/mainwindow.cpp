@@ -1,25 +1,22 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-/**
- * @brief WindowsIsMax
- * @details 该变量用来标识当前窗口是否最大化
- */
-static bool WindowsIsMax = false;
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
-    //为HeadWidget安装事件过滤器
-    ui->HeadWidget->installEventFilter(this);
+    this->ui->setupUi(this);
+    //安装事件过滤器
+    this->InitEventFilter();
     //设置无边框
     this->setWindowFlag(Qt::FramelessWindowHint);
     // 隐藏tabwidget头部
-    ui->MainTabWidget->tabBar()->hide();
+    this->ui->MainTabWidget->tabBar()->hide();
+    this->ui->SignInTabWidget->tabBar()->hide();
     //主页面初始化
     this->InitCentreWidget();
+    //连接信号和槽
+    this->Init_SignalAndSlot();
     //初始化数据库
     this->InitMySQL(&this->MySQL_Data);
 }
@@ -52,6 +49,27 @@ void MainWindow::InitMySQL(MYSQL* MySQL_Data)
         CloseTimer->start(0);
         connect(CloseTimer, &QTimer::timeout, this, [=](){this->close(); qApp->quit();});
     }
+}
+
+/**
+ * @brief MainWindow::InitEventFilter
+ * @author liwanyu
+ * @details 安装事件过滤器
+ */
+void MainWindow::InitEventFilter()
+{
+    //为HeadWidget安装事件过滤器
+    this->ui->HeadWidget->installEventFilter(this);
+    //为PushButton安装事件过滤器
+    this->ui->SignIn_Button->installEventFilter(this);
+    this->ui->SignInOK_Button->installEventFilter(this);
+    this->ui->Home_Quit_Button->installEventFilter(this);
+    this->ui->Close_Button->installEventFilter(this);
+    this->ui->Max_Button->installEventFilter(this);
+    this->ui->Min_Button->installEventFilter(this);
+    this->ui->ItemButton_1->installEventFilter(this);
+    this->ui->ItemButton_2->installEventFilter(this);
+    this->ui->ItemButton_3->installEventFilter(this);
 }
 
 /**
@@ -193,6 +211,24 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
             }
         }
     }
+    //针对按钮
+    if (obj == this->ui->SignIn_Button ||
+        obj == this->ui->SignInOK_Button ||
+        obj == this->ui->Home_Quit_Button ||
+        obj == this->ui->Close_Button ||
+        obj == this->ui->Max_Button ||
+        obj == this->ui->Min_Button ||
+        obj == this->ui->ItemButton_1 ||
+        obj == this->ui->ItemButton_2 ||
+        obj == this->ui->ItemButton_3)
+    {//当头部登录按钮能点击时，鼠标移动到其上时改变鼠标样式
+        QPushButton *tmp = (QPushButton*)obj;
+        if (tmp->isEnabled())
+            if (event->type() == QEvent::Enter)
+                setCursor(Qt::PointingHandCursor);
+        if (event->type() == QEvent::Leave)
+            setCursor(Qt::ArrowCursor);
+    }
     return QWidget::eventFilter(obj, event);
 }
 
@@ -200,58 +236,120 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
  * @brief MainWindow::InitCentreWidget
  * @param NULL
  * @author liwanyu
- * @details 主页面初始化
+ * @details 主页面初始化 未登录进入登录页面，已登录进入个人主页
  */
 void MainWindow::InitCentreWidget()
 {
-    this->ShowPage = this->ui->ExampleButton_0;
+    this->ShowPage = this->ui->SignIn_Button;
     this->ShowPage->setDisabled(true);
     this->ui->MainTabWidget->setCurrentIndex(0);
+    if (IsSignIn)
+    {
+        this->ui->ShowLabel->setText("已登录");
+        this->ui->SignInTabWidget->setCurrentIndex(1);
+    }
+    else
+    {
+        this->ui->ShowLabel->setText("未登录");
+        this->ui->SignInTabWidget->setCurrentIndex(0);
+    }
 }
 
 /**
- * @brief MainWindow::on_ExampleButton_0_clicked
+ * @brief MainWindow::Init_SignalAndSlot
+ * @author liwanyu
+ * @details 关联事件与槽函数
+ */
+void MainWindow::Init_SignalAndSlot()
+{
+    //关联账户输入框输入事件与使能登录按钮槽函数
+    QObject::connect(this->ui->UserName_LineEdit, SIGNAL(textChanged(QString)), this, SLOT(EnableOKButton()));
+    //关联密码输入框输入事件与使能登录按钮槽函数
+    QObject::connect(this->ui->PassWord_LineEdit, SIGNAL(textChanged(QString)), this, SLOT(EnableOKButton()));
+}
+
+/**
+ * @brief MainWindow::on_SignIn_Button_clicked
  * @param NULL
  * @author liwanyu
- * @details 按钮点击槽函数
+ * @details 登录按钮点击槽函数 未登录进入登录页面，已登录进入个人主页
  */
-void MainWindow::on_ExampleButton_0_clicked()
+void MainWindow::on_SignIn_Button_clicked()
 {
-    //设置之前按钮可以
     this->ShowPage->setDisabled(false);
-    //指向当前按钮
-    this->ShowPage = this->ui->ExampleButton_0;
-    //设置当前按钮不可以
+    this->ShowPage = this->ui->SignIn_Button;
     this->ShowPage->setDisabled(true);
-    //切换页面
     this->ui->MainTabWidget->setCurrentIndex(0);
+    if (IsSignIn)
+    {
+        this->ui->ShowLabel->setText("已登录");
+        this->ui->SignInTabWidget->setCurrentIndex(1);
+    }
+    else
+    {
+        this->ui->ShowLabel->setText("未登录");
+        this->ui->SignInTabWidget->setCurrentIndex(0);
+    }
 }
 
 /**
- * @brief MainWindow::on_ExampleButton_2_clicked
+ * @brief MainWindow::on_ItemButton_1_clicked
  * @param NULL
  * @author liwanyu
- * @details 按钮点击槽函数
+ * @details 按钮点击槽函数 (登录后可用，否则提示登录)切换至//
  */
-void MainWindow::on_ExampleButton_1_clicked()
+void MainWindow::on_ItemButton_1_clicked()
 {
-    this->ShowPage->setDisabled(false);
-    this->ShowPage = this->ui->ExampleButton_1;
-    this->ShowPage->setDisabled(true);
-    this->ui->MainTabWidget->setCurrentIndex(1);
+    if (IsSignIn)
+    {
+        //设置之前按钮可以
+        this->ShowPage->setDisabled(false);
+        //指向当前按钮
+        this->ShowPage = this->ui->ItemButton_1;
+        //设置当前按钮不可以
+        this->ShowPage->setDisabled(true);
+        //切换页面
+        this->ui->MainTabWidget->setCurrentIndex(1);
+    }
+    else
+        QMessageBox::information(this, "注意", "请先登录！");
+
 }
 
 /**
- * @brief MainWindow::on_ExampleButton_2_clicked
+ * @brief MainWindow::on_ItemButton_2_clicked
  * @param NULL
  * @author liwanyu
- * @details 按钮点击槽函数
+ * @details 按钮点击槽函数 (登录后可用，否则提示登录)切换至\\
  */
-void MainWindow::on_ExampleButton_2_clicked()
+void MainWindow::on_ItemButton_2_clicked()
 {
-    this->ShowPage->setDisabled(false);
-    this->ShowPage = this->ui->ExampleButton_2;
-    this->ShowPage->setDisabled(true);
-    this->ui->MainTabWidget->setCurrentIndex(2);
+    if (IsSignIn)
+    {
+        this->ShowPage->setDisabled(false);
+        this->ShowPage = this->ui->ItemButton_2;
+        this->ShowPage->setDisabled(true);
+        this->ui->MainTabWidget->setCurrentIndex(2);
+    }
+    else
+        QMessageBox::information(this, "注意", "请先登录！");
 }
 
+/**
+ * @brief MainWindow::on_ItemButton_3_clicked
+ * @param NULL
+ * @author liwanyu
+ * @details 按钮点击槽函数 (登录后可用，否则提示登录)切换至\\
+ */
+void MainWindow::on_ItemButton_3_clicked()
+{
+    if (IsSignIn)
+    {
+        this->ShowPage->setDisabled(false);
+        this->ShowPage = this->ui->ItemButton_3;
+        this->ShowPage->setDisabled(true);
+        this->ui->MainTabWidget->setCurrentIndex(3);
+    }
+    else
+        QMessageBox::information(this, "注意", "请先登录！");
+}

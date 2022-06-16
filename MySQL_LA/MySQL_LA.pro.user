@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.11.1, 2022-06-11T22:00:27. -->
+<!-- Written by QtCreator 4.11.1, 2022-06-16T01:48:02. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -287,7 +287,6 @@
     </valuelist>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">MySQL_LA2</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:E:/Git/MySQL_L/MySQL_LA/MySQL_LA.pro</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">E:/Git/MySQL_L/MySQL_LA/MySQL_LA.pro</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>

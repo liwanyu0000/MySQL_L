@@ -16,6 +16,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Global_Data.cpp \
+    SignIn.cpp \
     main.cpp \
     mainwindow.cpp
 
@@ -38,4 +40,4 @@ INCLUDEPATH += 'D:/Program Files (x86)/mysql-8.0.28-winx64/include'
 DEPENDPATH += 'D:/Program Files (x86)/mysql-8.0.28-winx64/include'
 
 RESOURCES += \
-    resources.qrc
+    Resources.qrc

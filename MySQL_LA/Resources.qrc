@@ -5,6 +5,8 @@
         <file>icon/Max_2.png</file>
         <file>icon/min.png</file>
         <file>image/Logo.png</file>
-        <file>icon/Login.png</file>
+        <file>icon/SignIn.png</file>
+        <file>icon/PassWord.png</file>
+        <file>icon/UserName.png</file>
     </qresource>
 </RCC>

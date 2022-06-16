@@ -278,7 +278,7 @@ Makefile: ../../MySQL_LU/MySQL_LU.pro D:/Qt/Qt5.14.2/5.14.2/mingw73_64/mkspecs/w
 		D:/Qt/Qt5.14.2/5.14.2/mingw73_64/lib/Qt5Core.prl \
 		D:/Qt/Qt5.14.2/5.14.2/mingw73_64/lib/qtmain.prl \
 		D:/Qt/Qt5.14.2/5.14.2/mingw73_64/mkspecs/features/build_pass.prf \
-		../../MySQL_LU/resources.qrc
+		../../MySQL_LU/Resources.qrc
 	$(QMAKE) -o Makefile ..\..\MySQL_LU\MySQL_LU.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
 D:/Qt/Qt5.14.2/5.14.2/mingw73_64/mkspecs/features/spec_pre.prf:
 D:/Qt/Qt5.14.2/5.14.2/mingw73_64/mkspecs/qdevice.pri:
@@ -488,7 +488,7 @@ D:/Qt/Qt5.14.2/5.14.2/mingw73_64/lib/Qt5Gui.prl:
 D:/Qt/Qt5.14.2/5.14.2/mingw73_64/lib/Qt5Core.prl:
 D:/Qt/Qt5.14.2/5.14.2/mingw73_64/lib/qtmain.prl:
 D:/Qt/Qt5.14.2/5.14.2/mingw73_64/mkspecs/features/build_pass.prf:
-../../MySQL_LU/resources.qrc:
+../../MySQL_LU/Resources.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\..\MySQL_LU\MySQL_LU.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
 

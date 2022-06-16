@@ -23,19 +23,26 @@ protected:
     bool eventFilter(QObject *obj, QEvent *event);  //重写事件过滤器
 private slots:
     void on_Max_Button_clicked();
-    void on_ExampleButton_0_clicked();
-    void on_ExampleButton_1_clicked();
-    void on_ExampleButton_2_clicked();
+    void on_ItemButton_1_clicked();
+    void on_ItemButton_2_clicked();
+    void on_ItemButton_3_clicked();
     void on_Min_Button_clicked();
     void on_Close_Button_clicked();
-
+    void on_SignIn_Button_clicked();
+    void on_Home_Quit_Button_clicked();
+    void EnableOKButton();
+    void on_SignInOK_Button_clicked();
 private:
     Ui::MainWindow *ui;
     MYSQL MySQL_Data;                               //MySQL句柄
     QPoint DragPosition;                            //记录鼠标上一次的位置
-    QPushButton *ShowPage;                           //当前选中的页
+    QPushButton *ShowPage;                          //当前选中的页
+    AdminInfo Admin;                                //管理员信息
     void InitMySQL(MYSQL *MySQL_Data);              //数据库初始化
     void Max_Button_UpdateIcon();                   //最大化\恢复按钮图标切换
+    void InitEventFilter();                         //安装事件过滤器
     void InitCentreWidget();                        //主页面初始化
+    void Init_SignalAndSlot();                      //连接信号和槽
+    bool SignIn_Verification(QString UserName, bool IsPhone);       //邮箱\手机号登录验证
 };
 #endif // MAINWINDOW_H
