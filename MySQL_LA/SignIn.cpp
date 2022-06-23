@@ -49,11 +49,11 @@ bool MainWindow::SignIn_Verification(QString UserName, bool IsPhone)
     //验证账户是否存在
     if (IsPhone)
         MySQLSentence = "SELECT * FROM admininfo WHERE adminphone = '"
-                        + UserName.toStdString() + "';";
+                + UserName.toStdString() + "';";
     else
         MySQLSentence = "SELECT * FROM admininfo WHERE adminemail = '"
                         + UserName.toStdString() + "';";
-    if (mysql_query(&this->MySQL_Data, MySQLSentence.c_str()))      //执行查询语句
+    if (mysql_query(&this->MySQL_Data, MySQLSentence.c_str()))      //执行SQL语句
     {
         QString Error = "error:";
         Error += mysql_error(&this->MySQL_Data);
@@ -74,6 +74,10 @@ bool MainWindow::SignIn_Verification(QString UserName, bool IsPhone)
         return false;
     }
     //判断账户是否激活
+//    while (column = mysql_fetch_row(res))
+//    {
+
+//    }
     column = mysql_fetch_row(res);                                  //获取第一行数据
     if (!strcmp(column[3], "0"))
     {
@@ -128,8 +132,30 @@ void MainWindow::on_SignInOK_Button_clicked()
         this->ui->IDLabel->setText(QString("%1").arg(QString::
                                    fromStdString(this->Admin.AdminID).toInt(),
                                    10, 10, QLatin1Char('0')));          //显示ID,10位
+        Home_showmessage();
         IsSignIn = true;                                                //标记已登录
     }
     else
         this->ui->ShowLabel->setText("登录页面     登录失败！");
+
 }
+
+
+void MainWindow::on_Home_Update_Button_clicked()
+{
+
+}
+/**
+ * @brief MainWindow::Home_showmessage
+ * @param NULL
+ * @author luorong
+ * @details 主页管理员信息展示函数
+*/
+void MainWindow :: Home_showmessage()
+{
+    this->ui->Home_NameLabel ->setText(QString::fromStdString(this->Admin.AdminName));
+    this->ui->Home_EmailLabel->setText(QString::fromStdString(this->Admin.AdminEmail));
+    this->ui->Home_PhomeLabel->setText(QString::fromStdString(this->Admin.AdminPhone));
+
+}
+

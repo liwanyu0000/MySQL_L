@@ -1,0 +1,10 @@
+release/Global_Data.o
+release/Message.o
+release/Pay.o
+release/Properity.o
+release/Repair.o
+release/SignIn.o
+release/main.o
+release/mainwindow.o
+release/qrc_Resources.o
+release/moc_mainwindow.o

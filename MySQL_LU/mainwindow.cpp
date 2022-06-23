@@ -13,12 +13,20 @@ MainWindow::MainWindow(QWidget *parent)
     // 隐藏tabwidget头部
     this->ui->MainTabWidget->tabBar()->hide();
     this->ui->SignInTabWidget->tabBar()->hide();
+    //隐藏NewsTabWidget头部
+
     //主页面初始化
     this->InitCentreWidget();
     //连接信号和槽
     this->Init_SignalAndSlot();
     //初始化数据库
     this->InitMySQL(&this->MySQL_Data);
+    //初始化消息列表
+    this->InitNewsList_TableWidget();
+    //初始化服务功能
+    this->InitServer();
+    //初始化缴费功能
+    this->InitCost();
 }
 
 MainWindow::~MainWindow()
@@ -75,6 +83,65 @@ void MainWindow::InitEventFilter()
     this->ui->ItemButton_1->installEventFilter(this);
     this->ui->ItemButton_2->installEventFilter(this);
     this->ui->ItemButton_3->installEventFilter(this);
+
+}
+
+
+void MainWindow::InitNewsList_TableWidget()
+{
+
+    this->ui->NewsTabWidget->tabBar()->hide();//隐藏头部
+    this->ui->NewsTabWidget->setCurrentIndex(0);//首次页
+    this->ui->NewsList_TableWidget->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
+    this->ui->NewsList_TableWidget->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
+    this->ui->NewsList_TableWidget->horizontalHeader()->setSectionResizeMode(2, QHeaderView::ResizeToContents);
+    this->ui->NewsList_TableWidget->horizontalHeader()->setSectionResizeMode(3, QHeaderView::ResizeToContents);
+    QHeaderView* headerView = ui->NewsList_TableWidget->verticalHeader();//m_ItemTable为QTableWidget
+    headerView->setHidden(true);//隐藏tablewidget自带行号列
+    this->ui->NewsList_TableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);//一次选一行
+    this->ui->NewsList_TableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);//不可更改
+}
+
+void MainWindow::InitServer()
+{
+    this->ui->serverfile->tabBar()->hide();
+    this->ui->Pcar_file->tabBar()->hide();
+    this->ui->task_file->tabBar()->hide();
+    this->ui->serverfile->setCurrentIndex(0);
+    this->ui->task_file->setCurrentIndex(0);
+    this->ui->Pcar_file->setCurrentIndex(0);
+    QHeaderView* headerView = ui->Nottable->verticalHeader();//m_ItemTable为QTableWidget
+    headerView->setHidden(true);//隐藏tablewidget自带行号列
+    this->ui->Nottable->setSelectionBehavior(QAbstractItemView::SelectRows);//一次一行
+    this->ui->Nottable->setEditTriggers(QAbstractItemView::NoEditTriggers);//不可更改
+    QHeaderView* headerView1 = ui->Hastable->verticalHeader();//m_ItemTable为QTableWidget
+    headerView1->setHidden(true);//隐藏tablewidget自带行号列
+    this->ui->Hastable->setSelectionBehavior(QAbstractItemView::SelectRows);//一次一行
+    this->ui->Hastable->setEditTriggers(QAbstractItemView::NoEditTriggers);//不可更改
+    QHeaderView* headerView2 = ui->Fitable->verticalHeader();//m_ItemTable为QTableWidget
+    headerView2->setHidden(true);//隐藏tablewidget自带行号列
+    this->ui->Fitable->setSelectionBehavior(QAbstractItemView::SelectRows);//一次一行
+    this->ui->Fitable->setEditTriggers(QAbstractItemView::NoEditTriggers);//不可更改
+    QHeaderView* headerView3 = ui->Mypcar_Table->verticalHeader();//m_ItemTable为QTableWidget
+    headerView3->setHidden(true);//隐藏tablewidget自带行号列
+    this->ui->Mypcar_Table->setSelectionBehavior(QAbstractItemView::SelectRows);//一次一行
+    this->ui->Mypcar_Table->setEditTriggers(QAbstractItemView::NoEditTriggers);//不可更改
+    QHeaderView* headerView4 = ui->Buypcar_Table->verticalHeader();//m_ItemTable为QTableWidget
+    headerView4->setHidden(true);//隐藏tablewidget自带行号列
+    this->ui->Buypcar_Table->setEditTriggers(QAbstractItemView::NoEditTriggers);//不可更改
+}
+
+void MainWindow::InitCost()
+{
+    this->ui->cost_file->tabBar()->hide();
+    this->ui->cost_file->setCurrentIndex(0);
+    this->ui->bill_Table->setSelectionBehavior(QAbstractItemView::SelectRows);//一次一行
+    this->ui->bill_Table->setEditTriggers(QAbstractItemView::NoEditTriggers);//不可更改
+    QHeaderView* headerView1 = ui->bill_Table->verticalHeader();//m_ItemTable为QTableWidget
+    headerView1->setHidden(true);//隐藏tablewidget自带行号列
+    this->ui->pay_table->setEditTriggers(QAbstractItemView::NoEditTriggers);//不可更改
+    QHeaderView* headerView2 = ui->pay_table->verticalHeader();//m_ItemTable为QTableWidget
+    headerView2->setHidden(true);//隐藏tablewidget自带行号列
 }
 
 /**
@@ -330,6 +397,7 @@ void MainWindow::on_ItemButton_1_clicked()
         this->ShowPage->setDisabled(true);
         //切换页面
         this->ui->MainTabWidget->setCurrentIndex(1);
+        this->news_listWidget();
     }
     else
         QMessageBox::information(this, "注意", "请先登录！");
@@ -369,7 +437,75 @@ void MainWindow::on_ItemButton_3_clicked()
         this->ShowPage = this->ui->ItemButton_3;
         this->ShowPage->setDisabled(true);
         this->ui->MainTabWidget->setCurrentIndex(3);
+        this->Task_notBegin();
+        this->Task_Begin();
+        this->Task_finished();
+        this->Pcar_mypcar();
+        this->Pcar_buycar();
+
     }
     else
         QMessageBox::information(this, "注意", "请先登录！");
 }
+
+/**
+ * @brief MainWindow::on_ItemButton_4_clicked
+ * @param NULL
+ * @author liwanyu
+ * @details 按钮点击槽函数 (登录后可用，否则提示登录)切换至\\
+ */
+void MainWindow::on_ItemButton_4_clicked()
+{
+    if (IsSignIn)
+    {
+        this->ShowPage->setDisabled(false);
+        this->ShowPage = this->ui->ItemButton_4;
+        this->ShowPage->setDisabled(true);
+        this->ui->MainTabWidget->setCurrentIndex(4);
+    }
+    else
+        QMessageBox::information(this, "注意", "请先登录！");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

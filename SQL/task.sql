@@ -49,3 +49,10 @@ BEGIN
 END$$
 DELIMITER ;
 CALL fail_task(85);
+
+
+SELECT * FROM houseinfo, user_houserelation WHERE houseid = uh_relation_houseid AND uh_relation_userid = 3;
+
+CALL updata_old('46','3',6, 'text');
+
+SELECT task_houseid, taskstarttime, taskendtime, taskcontent FROM admin_taskrelation, taskinfo WHERE taskid = admin_task_taskid AND ataskstate = 1;

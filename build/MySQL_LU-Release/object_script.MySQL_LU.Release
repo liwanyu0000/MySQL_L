@@ -1,0 +1,12 @@
+release/Cost.o
+release/Global_Data.o
+release/Pcar.o
+release/Server.o
+release/SignIn.o
+release/Task.o
+release/complaint_and_acvice.o
+release/main.o
+release/mainwindow.o
+release/news.o
+release/qrc_Resources.o
+release/moc_mainwindow.o

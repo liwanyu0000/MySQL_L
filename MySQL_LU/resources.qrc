@@ -11,5 +11,7 @@
         <file>icon/Phone.png</file>
         <file>icon/Email.png</file>
         <file>icon/D_PassWord.png</file>
+        <file>icon/set.png</file>
+        <file>icon/Return.png</file>
     </qresource>
 </RCC>

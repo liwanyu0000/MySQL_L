@@ -63,6 +63,8 @@ void MainWindow::on_Home_Quit_Button_clicked()
     this->ui->ShowLabel->setText("未登录");
     this->ui->IDLabel->setText("");
     this->User.clear();
+    this->ui->Task_comboBox->clear();
+    this->ui->Pcar_comboBox->clear();
 }
 
 /**
@@ -190,6 +192,13 @@ void MainWindow::on_SignInOK_Button_clicked()
                                    fromStdString(this->User.UserID).toInt(),
                                    10, 10, QLatin1Char('0')));          //显示ID,10位
         IsSignIn = true;                                                //标记已登录
+        this->ui->lineEdit->setText(QString::fromStdString(this->User.UserName));
+        this->ui->lineEdit_2->setText(QString::fromStdString(this->User.UserPhone));
+        this->ui->lineEdit_3->setText(QString::fromStdString(this->User.UserEmail));
+        for (auto house : this->User.HouseId)
+            this->ui->Task_comboBox->addItem(QString::fromStdString(house));
+        for (auto house : this->User.HouseId)
+            this->ui->Pcar_comboBox->addItem(QString::fromStdString(house));
     }
     else
         this->ui->ShowLabel->setText("登录页面     登录失败！");

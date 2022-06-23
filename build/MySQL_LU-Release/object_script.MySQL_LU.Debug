@@ -1,0 +1,12 @@
+debug/Cost.o
+debug/Global_Data.o
+debug/Pcar.o
+debug/Server.o
+debug/SignIn.o
+debug/Task.o
+debug/complaint_and_acvice.o
+debug/main.o
+debug/mainwindow.o
+debug/news.o
+debug/qrc_Resources.o
+debug/moc_mainwindow.o

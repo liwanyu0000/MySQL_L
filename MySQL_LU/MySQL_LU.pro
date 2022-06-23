@@ -16,10 +16,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Cost.cpp \
     Global_Data.cpp \
+    Pcar.cpp \
+    Server.cpp \
     SignIn.cpp \
+    Task.cpp \
+    complaint_and_acvice.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    news.cpp
 
 HEADERS += \
     Base.h \
@@ -33,11 +39,12 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
+
+RESOURCES += \
+    Resources.qrc
+
 win32:CONFIG(release, debug|release): LIBS += -L'D:/Program Files (x86)/mysql-8.0.28-winx64/lib/' -llibmysql
 else:win32:CONFIG(debug, debug|release): LIBS += -L'D:/Program Files (x86)/mysql-8.0.28-winx64/lib/' -llibmysql
 
 INCLUDEPATH += 'D:/Program Files (x86)/mysql-8.0.28-winx64/include'
 DEPENDPATH += 'D:/Program Files (x86)/mysql-8.0.28-winx64/include'
-
-RESOURCES += \
-    Resources.qrc

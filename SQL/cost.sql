@@ -1,5 +1,5 @@
 ## 查询房屋费用
-SELECT * FROM costinfo, costtypeinfo WHERE cost_costtypeid = costtypeid AND cost_houseid = 1;
+SELECT * FROM costinfo, costtypeinfo WHERE cost_costtypeid = costtypeid AND cost_houseid =  1;
 
 ## 缴费修改
 

@@ -17,6 +17,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     Global_Data.cpp \
+    Message.cpp \
+    Pay.cpp \
+    Properity.cpp \
+    Repair.cpp \
     SignIn.cpp \
     main.cpp \
     mainwindow.cpp
